@@ -36,4 +36,58 @@ class CategoryController extends Controller
         $category = Categories::create($input);
         return response()->json($category, 200,["Charset"=>"utf-8"]);
     }
+
+    function update(Request $request, $id)
+    {
+        $category = Categories::find($id);
+        if (!$category) {
+            return response()->json(['message' => 'Category not found'], 404);
+        }
+        $input = $request->all();
+        if ($request->hasFile('image')) {
+            $image = $request->file("image");
+            $manager = new ImageManager(new Driver());
+            $folderName = "upload";
+            $folderPath = public_path($folderName);
+            if (!file_exists($folderPath) && !is_dir($folderPath)) {
+                mkdir($folderPath, 0777);
+            }
+            $sizes = [50, 150, 300, 600, 1200];
+            $imageName = uniqid() . ".webp";
+            foreach ($sizes as $size) {
+                $imageSave = $manager->make($image);
+                $imageSave->resize($size, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $imageNameWithSize = $size . '_' . $imageName;
+                $imageSave->encode('webp');
+                $imageSave->save($folderPath . "/" . $imageNameWithSize);
+            }
+            $oldImagePath = $folderPath . "/" . $category->image;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+            $input["image"] = $imageName;
+        }
+        $category->update($input);
+        return response()->json($category, 200, ["Charset" => "utf-8"]);
+    }
+
+    public function delete($id)
+    {
+        $file =  Categories::findOrFail($id);
+        $sizes = [50, 150, 300, 600, 1200];
+        foreach ($sizes as $size) {
+            $fileName = $_SERVER['DOCUMENT_ROOT'].'/upload/'.$size.'_'.$file["image"];
+            if (is_file($fileName)) {
+                unlink($fileName);
+            }
+        }
+        $file->delete();
+        return response()->json(['message' => 'category was successfully deleted']);
+    }
+
+
+
+
 }
