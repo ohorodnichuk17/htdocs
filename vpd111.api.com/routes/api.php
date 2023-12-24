@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("categories", [\App\Http\Controllers\API\CategoryController::class, 'getAll']);
 Route::post("categories/create", [\App\Http\Controllers\API\CategoryController::class, 'create']);
-Route::patch("categories/update/{id}", [\App\Http\Controllers\API\CategoryController::class, 'update']);
-Route::delete("categories/delete/{id}", [\App\Http\Controllers\API\CategoryController::class, 'delete']);
+Route::get('/categories/{id}', [\App\Http\Controllers\API\CategoryController::class, 'getById']);
+Route::delete("/categories/{id}", [\App\Http\Controllers\API\CategoryController::class, "delete"]);
+Route::post("/categories/edit/{id}", [\App\Http\Controllers\API\CategoryController::class, "edit"]);
+Route::get("categories/upload/{filename}", [\App\Http\Controllers\API\CategoryController::class, 'upload']);
