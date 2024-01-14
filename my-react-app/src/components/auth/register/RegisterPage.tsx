@@ -28,8 +28,8 @@ const RegisterPage = () => {
             navigate("/");
         }
         catch (ex) {
-            setErrorMessage("Щось пішло не так");
-            message.error('Помилка реєстрації!');
+            setErrorMessage("Something went wrong");
+            message.error('Registration error!');
         }
     }
 
@@ -75,14 +75,14 @@ const RegisterPage = () => {
                 <Form.Item
                     label="Ім'я"
                     name="name"
-                    rules={[{required: true, message: "Вкажіть ім'я!"}]}
+                    rules={[{required: true, message: "Enter name!"}]}
                 >
                     <Input/>
                 </Form.Item>
                 <Form.Item
                     label="Прізвище"
                     name="lastName"
-                    rules={[{required: true, message: "Вкажіть прізвище!"}]}
+                    rules={[{required: true, message: "Enter surname!"}]}
                 >
                     <Input/>
                 </Form.Item>
@@ -92,8 +92,8 @@ const RegisterPage = () => {
                     name="phone"
                     htmlFor="phone"
                     rules={[
-                        {required: true, message: 'Це поле є обов\'язковим!'},
-                        {min: 11, message: 'Телефон повинна містити мінімум 11 символи!'}
+                        {required: true, message: 'This field is mandatory!'},
+                        {min: 11, message: 'Phone must contain at least 11 characters!'}
                     ]}
                 >
                     <Input autoComplete="phone" id={"phone"}/>
@@ -123,16 +123,16 @@ const RegisterPage = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Електронна пошта"
+                    label="Email"
                     name="email"
                     htmlFor="email"
                     rules={[
                         {
                             type: 'email',
-                            message: 'Формати пошти не правильний!',
+                            message: 'Mail format is incorrect!',
                         },
-                        {required: true, message: 'Це поле є обов\'язковим!'},
-                        {min: 2, message: 'Пошта повинна містити мінімум 2 символи!'}
+                        {required: true, message: 'This field is mandatory!'},
+                        {min: 2, message: 'Mail must contain at least 2 characters!'}
                     ]}
                 >
                     <Input autoComplete="email" id={"email"}/>
@@ -140,11 +140,11 @@ const RegisterPage = () => {
 
                 <Form.Item
                     name="password"
-                    label="Пароль"
+                    label="Password"
                     htmlFor={"password"}
                     rules={[
-                        {required: true, message: 'Вкажіть Ваш пароль!',},
-                        {min: 6, message: 'Пароль має мати мінімум 6 символів!',},
+                        {required: true, message: 'Enter your password!',},
+                        {min: 6, message: 'Password must have at least 6 characters!',},
                     ]}
                     hasFeedback
                 >
@@ -153,21 +153,21 @@ const RegisterPage = () => {
 
                 <Form.Item
                     name="confirm"
-                    label="Повторіть Пароль"
+                    label="Repeat Password"
                     htmlFor={"confirm"}
                     dependencies={['password']}
                     hasFeedback
                     rules={[
                         {
                             required: true,
-                            message: 'Будь-ласка підтвердіть пароль!',
+                            message: 'Please confirm password!',
                         },
                         ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (!value || getFieldValue('password') === value) {
                                     return Promise.resolve();
                                 }
-                                return Promise.reject(new Error('Пароль не співпадають!'));
+                                return Promise.reject(new Error('Passwords do not match!'));
                             },
                         }),
                     ]}
@@ -181,7 +181,7 @@ const RegisterPage = () => {
 
                 <Form.Item wrapperCol={{offset: 8, span: 16}}>
                     <Button type="primary" htmlType="submit">
-                        Реєструватися
+                        Register
                     </Button>
                 </Form.Item>
             </Form>

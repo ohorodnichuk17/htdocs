@@ -40,6 +40,11 @@ const ContainerDefault: React.FC = () => {
                             icon: <UploadOutlined />,
                             label: <Link to={"/register"}>Registration</Link>,
                         },
+                        {
+                            key: '4',
+                            icon: <UploadOutlined />,
+                            label: <Link to={"/login"}>Login</Link>,
+                        },
                     ]}
                 />
             </Sider>
