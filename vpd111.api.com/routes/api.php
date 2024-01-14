@@ -27,3 +27,6 @@ Route::get("categories/upload/{filename}", [\App\Http\Controllers\API\CategoryCo
 
 Route::post("register", [\App\Http\Controllers\API\AuthController::class, 'register']);
 Route::post("login", [\App\Http\Controllers\API\AuthController::class, 'login']);
+
+Route::post('/oauth/{provider}', 'AuthController@redirectToProvider');
+Route::get('/oauth/{provider}/callback', 'AuthController@handleProviderCallback');

@@ -119,6 +119,62 @@
                 }
             }
         },
+        "/api/oauth/{provider}": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Redirect the user to the OAuth Provider.",
+                "operationId": "redirectToProvider",
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "path",
+                        "description": "OAuth provider name.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to OAuth Provider."
+                    }
+                }
+            }
+        },
+        "/api/oauth/{provider}/callback": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Obtain the user information from the OAuth Provider.",
+                "operationId": "handleProviderCallback",
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "path",
+                        "description": "OAuth provider name.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User information obtained from the OAuth Provider.",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unable to authenticate."
+                    }
+                }
+            }
+        },
         "/api/categories": {
             "get": {
                 "tags": [
