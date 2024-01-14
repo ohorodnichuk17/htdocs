@@ -39,7 +39,7 @@ const CategoryListPage = () => {
     };
 
     const goToEditPage = (categoryId: number) => {
-        navigate(`/edit-category/${categoryId}`);
+        navigate(`/edit/${categoryId}`);
     };
 
     const columns: ColumnsType<ICategoryItem> = [
@@ -58,7 +58,7 @@ const CategoryListPage = () => {
             dataIndex: 'image',
             key: 'image',
             render: (image: string) => (
-                <img src={`http://127.0.0.1:8000/upload/150_${image}`} alt={"Image"} style={{ width: '50px' }}/>
+                <img src={`http://127.0.0.1:8000/upload/${image}`} alt={"Image"} style={{ width: '50px' }}/>
             )
         },
         {

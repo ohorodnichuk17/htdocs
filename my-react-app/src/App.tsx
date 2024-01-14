@@ -5,6 +5,7 @@ import CategoriesListPage from "./components/categories/list/CategoriesListPage.
 import NoMatch from "./components/pages/NoMatch.tsx";
 import CategoryCreatePage from "./components/categories/create/CategoryCreatePage.tsx";
 import CategoryEditPage from "./components/categories/edit/CategoryEditPage.tsx";
+import RegisterPage from "./components/auth/register/RegisterPage.tsx";
 
 
 const App: React.FC = () => {
@@ -15,6 +16,7 @@ const App: React.FC = () => {
                 <Route index element={<CategoriesListPage />} />
                 <Route path={"create"} element={<CategoryCreatePage />} />
                 <Route path="edit/:categoryId" element={<CategoryEditPage />} />
+                <Route path={"register"} element={<RegisterPage />} />
                 <Route path="*" element={<NoMatch />} />
             </Route>
         </Routes>

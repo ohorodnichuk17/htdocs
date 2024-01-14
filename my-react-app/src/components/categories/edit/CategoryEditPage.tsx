@@ -19,7 +19,7 @@ const EditCategoryPage = () => {
                 const { data } = await axios.get(`http://127.0.0.1:8000/api/categories/${categoryId}`);
                 if (data && data.name) {
                     setCategory({ name: data.name });
-                    setImageUrl(`http://127.0.0.1:8000/upload/sud${data.image}`);
+                    setImageUrl(`http://127.0.0.1:8000/upload/${data.image}`);
                 }
             } catch (error) {
                 console.error('Fetch error', error);
