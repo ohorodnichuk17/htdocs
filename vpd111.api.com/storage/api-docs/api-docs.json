@@ -119,62 +119,6 @@
                 }
             }
         },
-        "/api/oauth/{provider}": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Redirect the user to the OAuth Provider.",
-                "operationId": "redirectToProvider",
-                "parameters": [
-                    {
-                        "name": "provider",
-                        "in": "path",
-                        "description": "OAuth provider name.",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "302": {
-                        "description": "Redirect to OAuth Provider."
-                    }
-                }
-            }
-        },
-        "/api/oauth/{provider}/callback": {
-            "get": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Obtain the user information from the OAuth Provider.",
-                "operationId": "handleProviderCallback",
-                "parameters": [
-                    {
-                        "name": "provider",
-                        "in": "path",
-                        "description": "OAuth provider name.",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User information obtained from the OAuth Provider.",
-                        "content": {
-                            "application/json": {}
-                        }
-                    },
-                    "401": {
-                        "description": "Unable to authenticate."
-                    }
-                }
-            }
-        },
         "/api/categories": {
             "get": {
                 "tags": [
@@ -333,6 +277,73 @@
                 "responses": {
                     "200": {
                         "description": "Add Category."
+                    }
+                }
+            }
+        },
+        "/api/product": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "operationId": "b96bc57a34e53fde346dcc1891899cc8",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "category_id",
+                                    "name",
+                                    "price",
+                                    "quantity",
+                                    "description",
+                                    "images[]"
+                                ],
+                                "properties": {
+                                    "category_id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "quantity": {
+                                        "type": "number"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "images[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Add Product."
+                    }
+                }
+            }
+        },
+        "/api/products": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "operationId": "3637f35848da061c7f957a8525b37339",
+                "responses": {
+                    "200": {
+                        "description": "List Products."
                     }
                 }
             }
